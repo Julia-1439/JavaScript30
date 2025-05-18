@@ -38,28 +38,79 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    const ex1 = inventors.filter(
+      inventor => (inventor.year >= 1500 && inventor.year <= 1599)
+    );
+    console.table(ex1);
+    
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const ex2 = inventors.map(
+      inventor => `${inventor.last}, ${inventor.first}`
+    );
+    console.table(ex2);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const ex3 = inventors.toSorted(
+      (inventorA, inventorB) => inventorA.year - inventorB.year 
+    );
+    console.table(ex3);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const ex4 = inventors.reduce(
+      (total, inventor) => total + (inventor.passed - inventor.year),
+      0
+    );
+    console.log(ex4)
 
     // 5. Sort the inventors by years lived
+    const ex5 = inventors.toSorted(
+      (a, b) => {
+        const lifespanA = a.passed - a.year;
+        const lifespanB = b.passed - b.year;
+        return lifespanA - lifespanB;
+      }
+    )
+    console.table(ex5);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    
+    /** 
+    const category = document.querySelector(".mw-category");
+    const links = Array.from(category.querySelectorAll("a"));
+    const de = links
+      .map(link => link.textContent)
+      .filter(streetName => streetName.includes("de"));
+    */
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const ex7 = people.toSorted(
+      (a, b) => {
+        const aLast = a.split(", ")[0];
+        const bLast = b.split(", ")[0];
+        return aLast < bLast ? -1 : 1;
+      }
+    )
+    console.table(ex7);
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const ex8 = data.reduce(
+      (itemCounts, item) => {
+        if (!itemCounts[item]) {
+          itemCounts[item] = 0;
+        }
+        itemCounts[item]++;
+        return itemCounts;
+      }, {}
+    )
+    console.table(ex8);
 
   </script>
 </body>
